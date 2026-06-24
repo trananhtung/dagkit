@@ -4,14 +4,14 @@
 
 Zero-dependency TypeScript DAG (Directed Acyclic Graph) utilities: topological sort, parallel execution batches, cycle detection, ancestors/descendants. Port of Python `graphlib` (stdlib since 3.9), Java Guava `Graph`, Go `gonum/graph`.
 
-[![npm](https://img.shields.io/npm/v/dagkit)](https://www.npmjs.com/package/dagkit)
-[![license](https://img.shields.io/npm/l/dagkit)](LICENSE)
+[![npm](https://img.shields.io/npm/v/@billdaddy/dagkit)](https://www.npmjs.com/package/@billdaddy/dagkit)
+[![license](https://img.shields.io/npm/l/@billdaddy/dagkit)](LICENSE)
 [![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
 
 ## Install
 
 ```bash
-npm install dagkit
+npm install @billdaddy/dagkit
 ```
 
 ## Why?
@@ -23,7 +23,7 @@ The most downloaded topological sort package on npm (`toposort`, 12M/week) has b
 ## Quick start
 
 ```typescript
-import { DAG } from "dagkit";
+import { DAG } from "@billdaddy/dagkit";
 
 const g = new DAG<string>();
 
@@ -43,7 +43,7 @@ g.batches(); // [["compile"], ["test"], ["deploy"]]
 For one-shot usage without creating a `DAG` object:
 
 ```typescript
-import { topologicalSort, parallelBatches, hasCycle } from "dagkit";
+import { topologicalSort, parallelBatches, hasCycle } from "@billdaddy/dagkit";
 
 // Install packages in dependency order
 const packages = ["react-dom", "react", "my-app", "lodash"];
@@ -107,7 +107,7 @@ g.descendants("a");             // Set of all nodes reachable from a
 ### Package dependency installation order
 
 ```typescript
-import { topologicalSort, CycleError } from "dagkit";
+import { topologicalSort, CycleError } from "@billdaddy/dagkit";
 
 interface Package { name: string; deps: string[] }
 
@@ -130,7 +130,7 @@ function installOrder(packages: Package[]): string[] {
 ### CI/CD pipeline with parallel steps
 
 ```typescript
-import { DAG } from "dagkit";
+import { DAG } from "@billdaddy/dagkit";
 
 const pipeline = new DAG<string>();
 
@@ -164,7 +164,7 @@ const schedule = pipeline.batches();
 ### Task scheduler: affected tasks when a file changes
 
 ```typescript
-import { DAG } from "dagkit";
+import { DAG } from "@billdaddy/dagkit";
 
 const taskGraph = new DAG<string>();
 taskGraph.addEdge("parse", "typecheck");
@@ -181,7 +181,7 @@ const affected = taskGraph.descendants("parse");
 ### Validate no circular imports
 
 ```typescript
-import { hasCycle, CycleError, DAG } from "dagkit";
+import { hasCycle, CycleError, DAG } from "@billdaddy/dagkit";
 
 // From your bundler's import graph
 const modules = ["app", "utils", "types", "config"];
